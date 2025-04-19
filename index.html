@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DonationShare - Connect and Donate</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(to right, #2563eb, #1d4ed8);
+        }
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        .animate-bounce-slow {
+            animation: bounce 3s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-blue-100">
+    <!-- Navigation Bar -->
+    <nav class="gradient-bg shadow-2xl p-4 sticky top-0 z-50">
+        <div class="flex justify-between items-center max-w-6xl mx-auto">
+            <!-- Logo -->
+            <a href="/" class="flex items-center space-x-3 text-white font-bold text-2xl hover-scale">
+                <img src="https://e7.pngegg.com/pngimages/600/250/png-clipart-donation-computer-icons-gift-charity-offers-miscellaneous-text.png" 
+                     alt="Hope Link Logo" 
+                     class="w-12 h-12 rounded-full border-2 border-white">
+                <span class="tracking-wider">Kindness Connect</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#login" class="text-white hover:text-blue-200 transition-all duration-300 font-semibold flex items-center space-x-2 hover:bg-blue-700 hover:rounded-md py-2 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                        <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Donations</span>
+                </a>
+                <a href="#donate" class="text-white hover:text-blue-200 transition-all duration-300 font-semibold flex items-center space-x-2 hover:bg-blue-700 hover:rounded-md py-2 px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Donate Now</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white focus:outline-none" onclick="toggleMobileMenu()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#login" class="block px-3 py-2 text-white hover:bg-blue-700 rounded-md">Donations</a>
+                <a href="#donate" class="block px-3 py-2 text-white hover:bg-blue-700 rounded-md">Donate Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="container mx-auto px-6 py-16 flex flex-col md:flex-row items-center justify-between">
+        <div class="md:w-1/2 space-y-6">
+            <h1 class="text-4xl md:text-5xl font-bold text-blue-800">
+                Donate Smartly, <br />Impact Directly
+            </h1>
+            <p class="text-gray-600 text-lg">
+                Connect with local orphanages and old age homes. Transform your unused items into meaningful support.
+            </p>
+            <div class="flex space-x-4">
+                <a href="#login" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition flex items-center shadow-lg">
+                    List Your Donations
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+                <a href="#donate" class="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-50 transition flex items-center shadow-lg">
+                    Create Account
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="md:w-1/2 mt-10 md:mt-0">
+            <img src="/download.png" alt="Donation Illustration" class="w-full">
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="container mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-blue-800">How DonationShare Works</h2>
+            <p class="text-gray-600 mt-4">Simple, Direct, Impactful</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all transform hover:scale-105 text-center">
+                <div class="flex justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 3.5a1.5 1.5 0 013 0V4a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-.5a1.5 1.5 0 000 3h.5a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-.5a1.5 1.5 0 00-3 0v.5a1 1 0 01-1 1H6a1 1 0 01-1-1v-3a1 1 0 00-1-1h-.5a1.5 1.5 0 010-3H4a1 1 0 001-1V6a1 1 0 011-1h3a1 1 0 001-1v-.5z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">List Your Donations</h3>
+                <p class="text-gray-600">Easily upload items you want to donate</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all transform hover:scale-105 text-center">
+                <div class="flex justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Connect with Institutions</h3>
+                <p class="text-gray-600">Verified orphanages and old age homes browse donations</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all transform hover:scale-105 text-center">
+                <div class="flex justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Direct Impact</h3>
+                <p class="text-gray-600">Items go directly to those who need them most</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section id="login" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 py-16">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+            <div class="flex flex-col items-center mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-600 mb-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                </svg>
+                <h1 class="text-2xl font-bold text-gray-800">Access Donations</h1>
+                <p class="text-gray-600 text-center">
+                    Enter the password to view the available donations.
+                </p>
+            </div>
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label class="block text-gray-600 mb-2">Password</label>
+                    <div class="relative">
+                        <input
+                            type="password"
+                            id="password"
+                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                            placeholder="Enter the common password"
+                        />
+                        <button
+                            type="button"
+                            onclick="togglePassword()"
+                            class="absolute right-3 top-2 text-gray-600"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <p id="error" class="text-red-500 text-sm hidden"></p>
+                <button
+                    type="submit"
+                    class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition shadow"
+                >
+                    Login
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Donation Form Section -->
+    <section id="donate" class="max-w-md mx-auto p-6 bg-white border border-gray-200 rounded-2xl shadow-2xl my-16">
+        <div class="text-center mb-6">
+            <h2 class="text-3xl font-bold text-blue-700 mb-2">Donation Portal</h2>
+            <p class="text-gray-500 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                </svg>
+                Your donation makes a difference
+            </p>
+        </div>
+
+        <form id="donationForm" class="space-y-4">
+            <div>
+                <label class="block text-gray-700 mb-2">Your Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition duration-300"
+                    required
+                />
+            </div>
+
+            <div>
+                <label class="block text-gray-700 mb-2">Phone Number</label>
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="Enter your phone number"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition duration-300"
+                    required
+                />
+            </div>
+
+            <div>
+                <label class="block text-gray-700 mb-2">Item Name</label>
+                <input
+                    type="text"
+                    id="item"
+                    placeholder="What would you like to donate?"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition duration-300"
+                    required
+                />
+            </div>
+
+            <div>
+                <label class="block text-gray-700 mb-2">Quantity</label>
+                <input
+                    type="number"
+                    id="quantity"
+                    min="1"
+                    placeholder="How many items?"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition duration-300"
+                    required
+                />
+            </div>
+
+            <div>
+                <label class="block text-gray-700 mb-2">Description</label>
+                <textarea
+                    id="description"
+                    placeholder="Additional details about your donation"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition duration-300 min-h-[100px]"
+                ></textarea>
+            </div>
+
+            <div>
+                <label class="block text-gray-700 mb-2">Item Image URL</label>
+                <input
+                    type="url"
+                    id="imageUrl"
+                    placeholder="Enter the image URL"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition duration-300"
+                />
+            </div>
+
+            <button
+                type="submit"
+                class="w-full py-3 text-white rounded-lg transition duration-300 flex items-center justify-center bg-blue-600 hover:bg-blue-700 active:bg-blue-800"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                Donate Now
+            </button>
+
+            <div id="status" class="mt-4 p-3 rounded-lg flex items-center hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span id="statusMessage"></span>
+            </div>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-blue-50 to-blue-100 text-gray-800 py-12 shadow-lg">
+        <div class="container mx-auto px-6 md:flex md:justify-between space-y-8 md:space-y-0">
+            <!-- Logo and Description -->
+            <div class="mb-6 md:mb-0 md:w-1/3">
+                <div class="flex items-center mb-4">
+                    <img src="https://e7.pngegg.com/pngimages/600/250/png-clipart-donation-computer-icons-gift-charity-offers-miscellaneous-text.png" 
+                         alt="Hope Link Logo" 
+                         class="w-12 h-12 rounded-full border-2 border-white">
+                    <span class="text-3xl font-bold text-blue-700 ml-3">Hope Link</span>
+                </div>
+                <p class="text-gray-600 leading-relaxed">
+                    Connecting kind hearts with those in need. Together, we can create a direct impact through meaningful donations.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="mb-6 md:mb-0 md:w-1/3 hover:translate-x-1 transition-transform">
+                <h4 class="text-xl font-semibold mb-4 text-blue-700 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" />
+                    </svg>
+                    Quick Links
+                </h4>
+                <ul class="space-y-3">
+                    <li>
+                        <a href="#" class="flex items-center text-gray-700 hover:text-blue-600 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                            </svg>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#login" class="flex items-center text-gray-700 hover:text-blue-600 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M4 4a1 1 0 011-1h4.586a1 1 0 01.707.293l7 7a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7a1 1 0 01-.293-.707V5a1 1 0 011-1z" />
+                            </svg>
+                            List Donations
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#donate" class="flex items-center text-gray-700 hover:text-blue-600 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                            </svg>
+                            Create Account
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="md:w-1/3 space-y-4">
+                <h4 class="text-xl font-semibold text-blue-700 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                    </svg>
+                    Contact Us
+                </h4>
+                <div class="space-y-2">
+                    <p class="flex items-center text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                        </svg>
+                        <a href="mailto:contact@donationshare.com" class="hover:text-blue-600 transition-colors">
+                            contact@donationshare.com
+                        </a>
+                    </p>
+                    <p class="flex items-center text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                        </svg>
+                        +123 456 7890
+                    </p>
+                </div>
+
+                <!-- Social Icons -->
+                <div class="flex space-x-4 mt-4">
+                    <a href="#" class="text-blue-700 hover:text-blue-900 transition-all transform hover:scale-110">
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-blue-500 hover:text-blue-700 transition-all transform hover:scale-110">
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-pink-600 hover:text-pink-800 transition-all transform hover:scale-110">
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-center mt-10 text-gray-500 animate-bounce-slow">
+            © <script>document.write(new Date().getFullYear())</script> DonationShare. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Password Visibility Toggle
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+        }
+
+        // Form Submissions
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+            const errorElement = document.getElementById('error');
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password }),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    window.location.href = '/items';
+                } else {
+                    errorElement.textContent = result.message;
+                    errorElement.classList.remove('hidden');
+                }
+            } catch (err) {
+                errorElement.textContent = 'An unexpected error occurred.';
+                errorElement.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('donationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const statusElement = document.getElementById('status');
+            const statusMessage = document.getElementById('statusMessage');
+
+            const donationData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                item: document.getElementById('item').value,
+                quantity: document.getElementById('quantity').value,
+                description: document.getElementById('description').value,
+                imageUrl: document.getElementById('imageUrl').value,
+            };
+
+            try {
+                const response = await fetch('/api/donations', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(donationData),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    statusElement.classList.remove('hidden');
+                    statusElement.classList.remove('bg-red-100', 'text-red-800');
+                    statusElement.classList.add('bg-green-100', 'text-green-800');
+                    statusMessage.textContent = result.message;
+                    document.getElementById('donationForm').reset();
+                } else {
+                    statusElement.classList.remove('hidden');
+                    statusElement.classList.remove('bg-green-100', 'text-green-800');
+                    statusElement.classList.add('bg-red-100', 'text-red-800');
+                    statusMessage.textContent = result.message || 'Submission failed';
+                }
+            } catch (error) {
+                statusElement.classList.remove('hidden');
+                statusElement.classList.remove('bg-green-100', 'text-green-800');
+                statusElement.classList.add('bg-red-100', 'text-red-800');
+                statusMessage.textContent = 'Network error. Please check your connection.';
+            }
+        });
+    </script>
+</body>
+</html> 
